@@ -1,0 +1,51 @@
+venv/scripts/activate #for virtual env.
+
+
+Here's the complete feature list in simple terms:
+Login & Registration
+
+Single login page → auto redirects to correct dashboard based on role
+Student registration with 2 steps and password strength checker
+Password must have uppercase, lowercase, number, special character, min 8 chars
+
+Student Dashboard
+
+Home → attendance charts, low attendance warning, recent resources and marks
+Attendance → subject wise %, history table, date filters, recovery calculator
+Resources → files grouped by subject, search, filter, download
+Marks → exam results, performance chart, filter by subject/type
+Timetable → weekly schedule, today view
+Profile → view info, edit profile, change password
+Notification bell → alerts for new resources and marks
+
+Faculty Dashboard
+
+Home → summary of lectures, resources, exams
+Attendance → mark attendance, session history, Excel download
+Resources → upload files, manage (edit/delete)
+Marks → create exams, enter marks, PDF download
+Timetable → weekly teaching schedule
+Students → view all students with attendance summary
+Notice Board → view notices from HOD
+Profile → view info, edit, change password
+Notification bell
+
+HOD Dashboard
+
+Home → overview of entire department stats
+Students → all students with attendance, at-risk alerts, filters
+Faculty → all faculty with subjects they teach
+Attendance → section and subject wise attendance overview
+Exams → all exam results with pass percentage
+Notice Board → create and send notices to all or specific faculty
+Profile → view HOD info, edit, change password
+Notification bell
+
+Other features
+
+Notifications auto-created when resource uploaded or marks entered or notice sent
+Excel attendance report with colors and formatting
+PDF marks report with styled headers and color-coded results
+Responsive design — works on mobile and desktop
+JWT authentication with auto token refresh
+Django admin panel with Jazzmin Navy Blue theme
