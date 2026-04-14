@@ -4,7 +4,7 @@ import { useAuth } from "../../context/AuthContext";
 import NotificationBell from "./NotificationBell";
 import {
   Home, ClipboardList, BookOpen, BarChart3,
-  User, Calendar, Menu, LogOut, GraduationCap
+  User, Calendar, Menu, LogOut, GraduationCap, Bell
 } from "lucide-react";
 
 const navItems = [
@@ -13,6 +13,7 @@ const navItems = [
   { path: "/student/resources", label: "Resources", Icon: BookOpen },
   { path: "/student/marks", label: "Exam Marks", Icon: BarChart3 },
   { path: "/student/timetable", label: "Timetable", Icon: Calendar },
+  { path: "/student/notices", label: "Notice Board", Icon: Bell },
   { path: "/student/profile", label: "Profile", Icon: User },
 ];
 

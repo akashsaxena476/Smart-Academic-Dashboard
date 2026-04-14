@@ -12,6 +12,7 @@ import StudentResources from "./pages/student/Resources";
 import StudentMarks from "./pages/student/Marks";
 import StudentTimetable from "./pages/student/Timetable";
 import StudentProfile from "./pages/student/Profile";
+import StudentNotices from "./pages/student/Notices";
 
 // Faculty Pages
 import FacultyHome from "./pages/faculty/Home";
@@ -48,6 +49,7 @@ export default function App() {
 <Route path="/student/marks" element={<ProtectedRoute role="student"><StudentMarks /></ProtectedRoute>} />
 <Route path="/student/timetable" element={<ProtectedRoute role="student"><StudentTimetable /></ProtectedRoute>} />
 <Route path="/student/profile" element={<ProtectedRoute role="student"><StudentProfile /></ProtectedRoute>} />
+<Route path="/student/notices" element={<ProtectedRoute role="student"><StudentNotices /></ProtectedRoute>} />
 
 {/* Faculty Routes */}
 <Route path="/faculty/students" element={<ProtectedRoute role="faculty"><FacultyStudents /></ProtectedRoute>} />

@@ -41,17 +41,17 @@ def upload_resource(request):
     serializer = ResourceSerializer(resource, context={'request': request})
     # Notify all students of this subject
     students = CustomUser.objects.filter(
-        role='student',
-        student_profile__semester=subject.semester,
-        student_profile__branch=subject.department.name
-    )
+    role='student',
+    student_profile__semester=subject.semester,
+    student_profile__branch=subject.department.name
+)
     for student in students:
         Notification.objects.create(
-            recipient=student,
-            title=f"New Resource: {title}",
-            message=f"{request.user.get_full_name()} uploaded '{title}' for {subject.name}",
-            notification_type='resource'
-        )
+        recipient=student,
+        title=f"New Resource: {title}",
+        message=f"{request.user.get_full_name()} uploaded '{title}' for {subject.name}",
+        notification_type='resource'
+    )
     return Response({
         'message': 'Resource uploaded successfully',
         'resource': serializer.data

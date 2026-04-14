@@ -11,4 +11,4 @@ class NoticeAdmin(admin.ModelAdmin):
 
 @admin.register(NoticeRead)
 class NoticeReadAdmin(admin.ModelAdmin):
-    list_display = ['notice', 'faculty', 'read_at']
+    list_display = ['notice', 'user', 'read_at']

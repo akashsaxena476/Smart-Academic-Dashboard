@@ -8,7 +8,13 @@ from .models import Notification
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def get_notifications(request):
-    notifications = Notification.objects.filter(recipient=request.user)[:20]
+    user = request.user
+
+    # Base filter — only get this user's notifications
+    notifications = Notification.objects.filter(
+        recipient=user
+    ).order_by('-created_at')[:20]
+
     data = [{
         'id': n.id,
         'title': n.title,
@@ -17,8 +23,16 @@ def get_notifications(request):
         'is_read': n.is_read,
         'created_at': n.created_at,
     } for n in notifications]
-    unread_count = Notification.objects.filter(recipient=request.user, is_read=False).count()
-    return Response({'notifications': data, 'unread_count': unread_count})
+
+    unread_count = Notification.objects.filter(
+        recipient=user,
+        is_read=False
+    ).count()
+
+    return Response({
+        'notifications': data,
+        'unread_count': unread_count
+    })
 
 
 @api_view(['PUT'])

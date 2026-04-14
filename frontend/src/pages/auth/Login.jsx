@@ -42,7 +42,7 @@ export default function Login() {
           <div className="bg-indigo-600 text-white w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-4 text-2xl font-bold text-white">
             SA
           </div>
-          <h1 className="text-2xl font-bold text-white text-gray-800">Smart Academic</h1>
+          <h1 className="text-2xl font-bold text-black text-gray-800">Smart Academic</h1>
           <p className="text-gray-500 text-sm mt-1">Sign in to your account</p>
         </div>
 
