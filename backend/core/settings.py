@@ -21,10 +21,7 @@ SECRET_KEY = 'django-insecure-59ws#e&)ys9t_@l(u1skz^sz!m*&)t&dm4j0w_58+xn+m=9gg6
 
 DEBUG = False
 
-ALLOWED_HOSTS = ['smart-academic-dashboard-4.onrender.com', 'localhost']
-
-STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -108,10 +105,10 @@ SIMPLE_JWT = {
     'AUTH_HEADER_TYPES': ('Bearer',),
 }
 
-# CORS - allow React frontend to talk to Django
-#CORS_ALLOWED_ORIGINS = [
-    #'http://localhost:5173',  # Vite default port
-#]
+#CORS - allow React frontend to talk to Django
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:5173',  # Vite default port
+]
 
 # Password validation
 AUTH_PASSWORD_VALIDATORS = [

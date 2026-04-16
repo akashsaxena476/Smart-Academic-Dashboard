@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: "https://smart-academic-dashboard-4.onrender.com/api",
+  baseURL: "http://127.0.0.1:8000/api",
 });
 
 API.interceptors.request.use((config) => {
@@ -20,7 +20,7 @@ API.interceptors.response.use(
       original._retry = true;
       try {
         const refresh = localStorage.getItem("refresh_token");
-        const res = await axios.post("https://smart-academic-dashboard-4.onrender.com/api/users/token/refresh/", { refresh });
+        const res = await axios.post("http://127.0.0.1:8000/api/users/token/refresh/", { refresh });
         localStorage.setItem("access_token", res.data.access);
         original.headers.Authorization = `Bearer ${res.data.access}`;
         return API(original);
