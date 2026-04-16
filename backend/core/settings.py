@@ -17,9 +17,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = 'django-insecure-59ws#e&)ys9t_@l(u1skz^sz!m*&)t&dm4j0w_58+xn+m=9gg6'
 
-DEBUG = True
-
-ALLOWED_HOSTS = []
+DEBUG = False
+ALLOWED_HOSTS = ['smart-academic-dashboard-1.onrender.com', 'localhost', '127.0.0.1']
 
 # Application definition
 INSTALLED_APPS = [
