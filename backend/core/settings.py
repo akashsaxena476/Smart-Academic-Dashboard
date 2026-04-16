@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/6.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/6.0/ref/settings/
 """
-
+import os
 from pathlib import Path
 from datetime import timedelta
 
@@ -17,8 +17,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = 'django-insecure-59ws#e&)ys9t_@l(u1skz^sz!m*&)t&dm4j0w_58+xn+m=9gg6'
 
+
+
 DEBUG = False
-ALLOWED_HOSTS = ['smart-academic-dashboard-1.onrender.com', 'localhost', '127.0.0.1']
+
+ALLOWED_HOSTS = ['smart-academic-dashboard-4.onrender.com', 'localhost']
+
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
 
 # Application definition
 INSTALLED_APPS = [
@@ -49,6 +56,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware', 
 ]
 
 ROOT_URLCONF = 'core.urls'
@@ -101,9 +109,9 @@ SIMPLE_JWT = {
 }
 
 # CORS - allow React frontend to talk to Django
-CORS_ALLOWED_ORIGINS = [
-    'http://localhost:5173',  # Vite default port
-]
+#CORS_ALLOWED_ORIGINS = [
+    #'http://localhost:5173',  # Vite default port
+#]
 
 # Password validation
 AUTH_PASSWORD_VALIDATORS = [
@@ -140,4 +148,11 @@ CORS_ALLOW_HEADERS = [
     'user-agent',
     'x-csrftoken',
     'x-requested-with',
+]
+
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+USE_X_FORWARDED_HOST = True
+
+CSRF_TRUSTED_ORIGINS = [
+    "https://smart-academic-dashboard-4.onrender.com",
 ]
