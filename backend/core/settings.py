@@ -27,7 +27,7 @@ ALLOWED_HOSTS = [
     'localhost',
     '127.0.0.1',
     'https://smart-academic-dashboard-6.onrender.com',# your render URL
-    config('RENDER_EXTERNAL_HOSTNAME', default=''),
+     config('RENDER_EXTERNAL_HOSTNAME', default=''),
 ]
 
 INSTALLED_APPS = [
@@ -51,9 +51,9 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',  # ✅ right after SecurityMiddleware
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -112,6 +112,7 @@ CORS_ALLOWED_ORIGINS = [
     'https://smart-academic-dashboard-alpha.vercel.app', # ← Replace with your actual Vercel URL
 ]
 CORS_ALLOW_ALL_ORIGINS = False  # ✅ Set False in production
+CORS_ALLOW_CREDENTIALS = True
 
 CORS_ALLOW_HEADERS = [
     'accept',
