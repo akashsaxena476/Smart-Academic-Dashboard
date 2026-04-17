@@ -10,7 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 import os
-import dj_database_url
+
 from pathlib import Path
 from datetime import timedelta
 from decouple import config  # pip install python-decouple
@@ -158,13 +158,3 @@ CSRF_TRUSTED_ORIGINS = [
 
 
 
-if os.environ.get('RENDER'):
-    from django.contrib.auth import get_user_model
-    User = get_user_model()
-    
-    if not User.objects.filter(username='admin').exists():
-        User.objects.create_superuser(
-            username='admin',
-            email='admin@example.com',
-            password='admin123'
-        )
