@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/6.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/6.0/ref/settings/
 """
-import os
+
 from pathlib import Path
 from datetime import timedelta
 
@@ -19,7 +19,7 @@ SECRET_KEY = 'django-insecure-59ws#e&)ys9t_@l(u1skz^sz!m*&)t&dm4j0w_58+xn+m=9gg6
 
 
 
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = []
 
