@@ -109,7 +109,7 @@ SIMPLE_JWT = {
 # ✅ CORS — allow your Vercel frontend URL
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:5173',
-      # ← Replace with your actual Vercel URL
+    'https://smart-academic-dashboard-alpha.vercel.app', # ← Replace with your actual Vercel URL
 ]
 CORS_ALLOW_ALL_ORIGINS = False  # ✅ Set False in production
 
@@ -152,5 +152,5 @@ USE_X_FORWARDED_HOST = True
 
 CSRF_TRUSTED_ORIGINS = [
     'https://smart-academic-dashboard-6.onrender.com',
- # ← your Vercel URL
+    'https://smart-academic-dashboard-alpha.vercel.app', # ← your Vercel URL
 ]
