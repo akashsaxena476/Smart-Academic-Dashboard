@@ -26,7 +26,7 @@ DEBUG = config('DEBUG', default=False, cast=bool)
 ALLOWED_HOSTS = [
     'localhost',
     '127.0.0.1',
-      # your render URL
+    'https://smart-academic-dashboard-6.onrender.com',# your render URL
     config('RENDER_EXTERNAL_HOSTNAME', default=''),
 ]
 
@@ -151,6 +151,6 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 USE_X_FORWARDED_HOST = True
 
 CSRF_TRUSTED_ORIGINS = [
-    
+    'https://smart-academic-dashboard-6.onrender.com',
  # ← your Vercel URL
 ]
