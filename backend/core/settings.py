@@ -12,19 +12,24 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 
 from pathlib import Path
 from datetime import timedelta
+from decouple import config  # pip install python-decouple
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = 'django-insecure-59ws#e&)ys9t_@l(u1skz^sz!m*&)t&dm4j0w_58+xn+m=9gg6'
+# ✅ Load from environment variable (set on Render dashboard)
+SECRET_KEY = config('SECRET_KEY', default='django-insecure-fallback-key')
 
+# ✅ False in production
+DEBUG = config('DEBUG', default=False, cast=bool)
 
+# ✅ Add your Render domain here
+ALLOWED_HOSTS = [
+    'localhost',
+    '127.0.0.1',
+      # your render URL
+    config('RENDER_EXTERNAL_HOSTNAME', default=''),
+]
 
-DEBUG = True
-
-ALLOWED_HOSTS = []
-
-
-# Application definition
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -46,14 +51,14 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',  # ✅ right after SecurityMiddleware
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'corsheaders.middleware.CorsMiddleware',       # CORS - must be before CommonMiddleware
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware', 
 ]
 
 ROOT_URLCONF = 'core.urls'
@@ -75,7 +80,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'core.wsgi.application'
 
-# Database - SQLite for development
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -83,10 +87,8 @@ DATABASES = {
     }
 }
 
-# Custom user model
 AUTH_USER_MODEL = 'users.CustomUser'
 
-# Django REST Framework
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
@@ -96,7 +98,6 @@ REST_FRAMEWORK = {
     ),
 }
 
-# JWT Settings
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(hours=8),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=7),
@@ -105,35 +106,12 @@ SIMPLE_JWT = {
     'AUTH_HEADER_TYPES': ('Bearer',),
 }
 
-#CORS - allow React frontend to talk to Django
+# ✅ CORS — allow your Vercel frontend URL
 CORS_ALLOWED_ORIGINS = [
-    'http://localhost:5173',  # Vite default port
+    'http://localhost:5173',
+      # ← Replace with your actual Vercel URL
 ]
-
-# Password validation
-AUTH_PASSWORD_VALIDATORS = [
-    {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
-    {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'},
-    {'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator'},
-    {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'},
-]
-
-# Internationalization
-LANGUAGE_CODE = 'en-us'
-TIME_ZONE = 'Asia/Kolkata'
-USE_I18N = True
-USE_TZ = True
-
-# Static files
-STATIC_URL = 'static/'
-
-# Media files (for resource uploads like PDFs)
-MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'
-
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_ALL_ORIGINS = False  # ✅ Set False in production
 
 CORS_ALLOW_HEADERS = [
     'accept',
@@ -147,9 +125,32 @@ CORS_ALLOW_HEADERS = [
     'x-requested-with',
 ]
 
+AUTH_PASSWORD_VALIDATORS = [
+    {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'},
+]
+
+LANGUAGE_CODE = 'en-us'
+TIME_ZONE = 'Asia/Kolkata'
+USE_I18N = True
+USE_TZ = True
+
+# ✅ WhiteNoise for static files
+STATIC_URL = '/static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
+
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 USE_X_FORWARDED_HOST = True
 
 CSRF_TRUSTED_ORIGINS = [
-    "https://smart-academic-dashboard-4.onrender.com",
+    
+ # ← your Vercel URL
 ]
