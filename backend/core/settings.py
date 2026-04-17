@@ -9,7 +9,8 @@ https://docs.djangoproject.com/en/6.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/6.0/ref/settings/
 """
-
+import os
+import dj_database_url
 from pathlib import Path
 from datetime import timedelta
 from decouple import config  # pip install python-decouple
@@ -26,7 +27,7 @@ DEBUG = config('DEBUG', default=False, cast=bool)
 ALLOWED_HOSTS = [
     'localhost',
     '127.0.0.1',
-    'https://smart-academic-dashboard-6.onrender.com',# your render URL
+    'smart-academic-dashboard-6.onrender.com',# your render URL
      config('RENDER_EXTERNAL_HOSTNAME', default=''),
 ]
 
@@ -80,11 +81,9 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'core.wsgi.application'
 
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    'default': dj_database_url.parse(config('DATABASE_URL'))
 }
 
 AUTH_USER_MODEL = 'users.CustomUser'
@@ -155,3 +154,17 @@ CSRF_TRUSTED_ORIGINS = [
     'https://smart-academic-dashboard-6.onrender.com',
     'https://smart-academic-dashboard-alpha.vercel.app', # ← your Vercel URL
 ]
+
+
+
+
+if os.environ.get('RENDER'):
+    from django.contrib.auth import get_user_model
+    User = get_user_model()
+    
+    if not User.objects.filter(username='admin').exists():
+        User.objects.create_superuser(
+            username='admin',
+            email='admin@example.com',
+            password='admin123'
+        )
